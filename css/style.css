@@ -355,6 +355,12 @@ body.locked #hub-footer { display: none; }
 .gate-box button:disabled { opacity: .6; cursor: default; }
 .gate-err { min-height: 18px; margin-top: 12px; font-size: 14px; color: #d24b3a; font-weight: 600; }
 
+/* 로그인 확인 중 스플래시 */
+.gate-splash { text-align: center; animation: gatePulse 1.6s ease-in-out infinite; }
+.gate-splash .em { font-size: 64px; display: block; margin-bottom: 12px; }
+.gate-splash .tx { font-size: 22px; font-weight: 800; color: var(--green-deep); }
+@keyframes gatePulse { 0%,100% { opacity: .55; } 50% { opacity: 1; } }
+
 /* ── 마이페이지 ── */
 #mypage-overlay {
   position: fixed;

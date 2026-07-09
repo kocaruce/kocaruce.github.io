@@ -169,6 +169,9 @@
       body.classList.remove("locked");
       return;
     }
+    // 로그인 확인 중엔 스플래시만 표시 (로그인창 깜박임 방지)
+    body.classList.add("locked");
+    showOverlay(`<div class="gate-splash"><span class="em">🌈</span><span class="tx">꿈 놀이터</span></div>`);
     window.watchAuth(onUser);
   }
 
