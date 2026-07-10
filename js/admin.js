@@ -148,6 +148,23 @@ function setupCleanup() {
       result.textContent = "정리에 실패했어요. 잠시 후 다시 시도해 주세요.";
     }
   };
+
+  // 후원기록 개인정보 정리
+  const donBtn = document.getElementById("don-cleanup-btn");
+  if (donBtn) donBtn.onclick = async () => {
+    const result = document.getElementById("don-cleanup-result");
+    if (!confirm("모든 후원 기록에서 이름·이메일 등 개인정보를 지울까요?\n후원 건수·시각은 유지되며, 되돌릴 수 없어요.")) return;
+    donBtn.disabled = true;
+    result.textContent = "정리하는 중…";
+    try {
+      const count = await window.adminCleanupDonations();
+      result.textContent = count > 0 ? `${count}건의 개인정보를 정리했어요.` : "정리할 개인정보가 없어요.";
+    } catch (e) {
+      result.textContent = "정리에 실패했어요. 보안 규칙(관리자 write 허용)을 확인해 주세요.";
+    } finally {
+      donBtn.disabled = false;
+    }
+  };
 }
 
 /* ── 데이터 로드 ── */

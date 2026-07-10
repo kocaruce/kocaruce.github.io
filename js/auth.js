@@ -129,5 +129,24 @@ window.adminCleanupOrders = async (beforeDate) => {
   return count;
 };
 
+// 후원기록 개인정보 정리: 레거시 기록에 남은 이름·이메일 등 개인 필드를 비우고
+// uid·시각·방법만 남긴다. 개인 필드가 있던 기록 수를 반환. (규칙상 관리자만 성공)
+window.adminCleanupDonations = async () => {
+  const data = await restGet("donations");
+  const updates = {};
+  let count = 0;
+  const piiFields = ["name", "email", "orgName", "region", "affiliation"];
+  for (const [key, v] of Object.entries(data)) {
+    if (!v) continue;
+    let touched = false;
+    for (const f of piiFields) {
+      if (v[f] !== undefined && v[f] !== null) { updates[`donations/${key}/${f}`] = null; touched = true; }
+    }
+    if (touched) count++;
+  }
+  if (Object.keys(updates).length) await update(ref(db), updates);
+  return count;
+};
+
 window.AUTH_READY = true;
 window.dispatchEvent(new Event("auth-ready"));
