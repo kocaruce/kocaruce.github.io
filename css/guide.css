@@ -1,0 +1,133 @@
+/* 놀이 안내 페이지 — 모바일 우선, 허브(style.css) 변수 재사용 */
+
+#guide-main { max-width: 760px; margin: 0 auto; padding: 0 20px 60px; }
+.guide-home { text-decoration: none; }
+
+/* ── 히어로 ── */
+.g-hero { text-align: center; padding: 34px 4px 10px; }
+.g-hero-sign {
+  width: min(420px, 86%);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  padding: 14px 18px;
+  margin-bottom: 20px;
+}
+.g-hero h1 { font-size: 28px; font-weight: 800; letter-spacing: -1px; }
+.g-hero-sub { margin: 12px auto 0; font-size: 16px; line-height: 1.7; color: var(--muted); }
+.g-tags { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 16px; }
+.g-tag {
+  font-size: 13px; font-weight: 700; color: var(--green-deep);
+  background: var(--green-soft); padding: 6px 13px; border-radius: 16px;
+}
+
+/* ── 목차 칩 ── */
+.g-chips {
+  position: sticky; top: 64px; z-index: 5; /* 고정 헤더 바로 아래 */
+  display: flex; gap: 8px; overflow-x: auto;
+  padding: 14px 2px;
+  margin: 14px -20px 6px; padding-left: 20px; padding-right: 20px;
+  background: linear-gradient(var(--bg) 85%, transparent);
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.g-chips::-webkit-scrollbar { display: none; }
+.g-chips a {
+  flex: none;
+  font-size: 14px; font-weight: 700; color: var(--green-deep);
+  background: var(--surface); border: 1px solid var(--line);
+  padding: 9px 15px; border-radius: 20px; text-decoration: none;
+  box-shadow: var(--shadow);
+}
+.g-chips a:active { background: var(--green-soft); }
+
+/* ── 섹션 ── */
+.g-section { margin-top: 34px; scroll-margin-top: 132px; }
+.g-section h2 { font-size: 22px; font-weight: 800; letter-spacing: -.5px; margin: 0 2px 6px; }
+.g-section-sub { font-size: 14px; color: var(--muted); margin: 0 2px 14px; }
+.g-section > .g-card { margin-top: 12px; }
+
+.g-card {
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: 18px; box-shadow: var(--shadow);
+  padding: 20px 22px;
+  font-size: 15px; line-height: 1.75; color: var(--ink);
+}
+.g-card b { color: var(--green-deep); }
+.g-note { margin-top: 12px; font-size: 13.5px; color: var(--muted); line-height: 1.65; }
+
+/* 놀이 흐름 한 줄 */
+.g-flow {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
+  margin: 14px 0 4px; font-size: 14px; font-weight: 700;
+}
+.g-flow span:not(.g-arrow) {
+  background: var(--green-soft); color: var(--green-deep);
+  padding: 8px 13px; border-radius: 14px;
+}
+.g-arrow { color: var(--muted); }
+
+/* ── 교육 효과 그리드 ── */
+.g-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin-top: 12px; }
+@media (min-width: 640px) { .g-grid { grid-template-columns: 1fr 1fr; } }
+.g-edu { display: flex; flex-direction: column; }
+.g-edu-emoji { font-size: 30px; margin-bottom: 8px; }
+.g-edu h3, .g-age h3 { font-size: 17px; font-weight: 800; margin-bottom: 6px; }
+.g-edu p { font-size: 14.5px; color: var(--muted); line-height: 1.7; }
+
+.g-goals { margin-top: 12px; }
+.g-goals h3 { font-size: 16px; font-weight: 800; margin-bottom: 10px; }
+.g-goals ul { margin: 0; padding-left: 4px; list-style: none; }
+.g-goals li { padding: 5px 0 5px 28px; position: relative; font-size: 14.5px; }
+.g-goals li::before { content: "✅"; position: absolute; left: 0; }
+
+/* ── 준비 단계 ── */
+.g-steps { margin: 4px 0 0; padding-left: 22px; }
+.g-steps li { padding: 5px 0; }
+
+/* ── 화면별 사용법 스텝 카드 ── */
+.g-step-card {
+  display: flex; gap: 14px; align-items: flex-start;
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: 18px; box-shadow: var(--shadow);
+  padding: 18px 20px; margin-top: 12px;
+}
+.g-step-no {
+  flex: none;
+  width: 40px; height: 40px; border-radius: 50%;
+  background: var(--green); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 19px; font-weight: 800;
+}
+.g-staff .g-step-no { background: var(--coral); font-size: 20px; }
+.g-step-body { min-width: 0; }
+.g-step-body h3 { font-size: 17px; font-weight: 800; margin: 6px 0 6px; }
+.g-step-body p { font-size: 14.5px; line-height: 1.75; color: var(--ink); }
+.g-step-body b { color: var(--green-deep); }
+.g-staff .g-step-body b { color: var(--coral-deep); }
+
+/* 단계 안 그림 */
+.g-visual {
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  background: #F4F9EE; border-radius: 14px;
+  padding: 14px 16px; margin: 12px 0 2px;
+}
+.g-visual img { height: 54px; }
+.g-visual img.coin { height: 30px; }
+.g-visual-plus, .g-visual-label { font-size: 16px; font-weight: 800; color: var(--green-deep); }
+.g-money img { height: 26px; }
+
+/* ── 연령별 팁 ── */
+.g-age ul { margin: 0; padding-left: 18px; }
+.g-age li { padding: 3px 0; font-size: 14.5px; color: var(--ink); line-height: 1.65; }
+.g-age b { color: var(--green-deep); }
+
+/* ── 확장 활동 ── */
+.g-more-list { margin: 0; padding: 0; list-style: none; }
+.g-more-list li { padding: 8px 0; font-size: 14.5px; line-height: 1.7; }
+
+/* ── 하단 CTA ── */
+.g-cta { text-align: center; margin-top: 44px; }
+.g-cta-btn { margin: 0 5px 10px; font-size: 17px; padding: 14px 26px; }
+.g-cta .g-note { margin-top: 6px; }
