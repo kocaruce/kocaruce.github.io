@@ -5,11 +5,11 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import {
   getAuth, onAuthStateChanged, signOut,
-  signInWithEmailAndPassword, createUserWithEmailAndPassword,
+  signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail,
   signInWithPopup, GoogleAuthProvider,
   deleteUser, reauthenticateWithPopup, reauthenticateWithCredential, EmailAuthProvider
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-import { getDatabase, ref, get, set, remove, push } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+import { getDatabase, ref, get, set, update, remove, push } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
 // 관리자(99p) uid — 회원 목록·후원 기록 열람 권한
 const ADMIN_UID = "qoYHZGbPCqShikrQJ6UbfBKSVPT2";
@@ -41,6 +41,7 @@ window.signInEmail = (email, pw) => signInWithEmailAndPassword(auth, email, pw);
 window.signUpEmail = (email, pw) => createUserWithEmailAndPassword(auth, email, pw);
 window.signInGoogle = () => signInWithPopup(auth, new GoogleAuthProvider());
 window.signOutUser = () => signOut(auth);
+window.sendPasswordReset = (email) => sendPasswordResetEmail(auth, email);
 
 // 선생님 프로필 (users/{uid})
 window.getProfile = async (uid) => {
@@ -66,17 +67,33 @@ window.deleteUserOnly = () => deleteUser(auth.currentUser);
 window.recordDonation = (data) => push(ref(db, "donations"), data);
 
 // ── 관리자 조회 ── (규칙상 관리자만 성공)
+// SDK get()은 개별 조회 캐시와 병합되며 항목이 누락되는 버그가 있어 REST로 직접 읽는다.
+async function restGet(path) {
+  const token = await auth.currentUser.getIdToken();
+  const res = await fetch(`${cfg.databaseURL}/${path}.json?auth=${token}`);
+  const data = await res.json();
+  if (!res.ok) throw new Error((data && data.error) || "read-failed");
+  return data || {};
+}
 window.adminGetUsers = async () => {
-  const snap = await get(ref(db, "users"));
-  const list = [];
-  snap.forEach(c => list.push({ uid: c.key, ...c.val() }));
-  return list;
+  const data = await restGet("users");
+  return Object.entries(data).map(([uid, v]) => ({ uid, ...v }));
 };
 window.adminGetDonations = async () => {
-  const snap = await get(ref(db, "donations"));
-  const list = [];
-  snap.forEach(c => list.push({ id: c.key, ...c.val() }));
-  return list;
+  const data = await restGet("donations");
+  return Object.entries(data).map(([id, v]) => ({ id, ...v }));
+};
+
+// 오래된 주문 정리: beforeDate(YYYY-MM-DD)보다 이전 날짜의 주문을 한 번에 삭제하고 삭제 건수를 반환
+window.adminCleanupOrders = async (beforeDate) => {
+  const data = await restGet("orders");
+  const updates = {};
+  let count = 0;
+  for (const [key, v] of Object.entries(data)) {
+    if (v && v.date && v.date < beforeDate) { updates["orders/" + key] = null; count++; }
+  }
+  if (count > 0) await update(ref(db), updates);
+  return count;
 };
 
 window.AUTH_READY = true;

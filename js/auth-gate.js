@@ -58,11 +58,12 @@
             <button type="button" class="gate-secondary" id="signup-btn">가입하기</button>
           </div>
         </form>
+        <button type="button" class="gate-link" id="forgot-btn">비밀번호를 잊으셨나요?</button>
         <p class="gate-err" id="gate-err"></p>
       </div>`);
 
     const err = ov.querySelector("#gate-err");
-    const setErr = (m) => { err.textContent = m; };
+    const setErr = (m, ok) => { err.textContent = m; err.classList.toggle("gate-ok", !!ok); };
     const busy = (b) => ov.querySelectorAll("button,input").forEach(e => e.disabled = b);
 
     ov.querySelector("#google-btn").onclick = async () => {
@@ -80,8 +81,24 @@
       try { await window.signUpEmail(g_email(), g_pw()); }
       catch (ex) { busy(false); setErr(signupErr(ex)); }
     };
+    ov.querySelector("#forgot-btn").onclick = async () => {
+      const email = g_email();
+      if (!email) { setErr("이메일을 먼저 입력해 주세요."); return; }
+      setErr(""); busy(true);
+      try {
+        await window.sendPasswordReset(email);
+        busy(false);
+        setErr("재설정 링크를 이메일로 보냈어요. 받은편지함을 확인해 주세요.", true);
+      } catch (ex) { busy(false); setErr(resetErr(ex)); }
+    };
     function g_email() { return ov.querySelector("#g-email").value.trim(); }
     function g_pw() { return ov.querySelector("#g-pw").value; }
+  }
+
+  function resetErr(e) {
+    if (e && e.code === "auth/invalid-email") return "이메일 형식을 확인해 주세요.";
+    if (e && e.code === "auth/user-not-found") return "가입되지 않은 이메일이에요.";
+    return "재설정 이메일 전송에 실패했어요. 잠시 후 다시 시도해 주세요.";
   }
 
   function googleErr(e) {

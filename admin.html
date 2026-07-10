@@ -26,7 +26,13 @@
         <div class="stat"><span class="stat-label">후원 기록</span><span class="stat-num" id="stat-dons">–</span></div>
       </div>
 
-      <h2 class="admin-h2">가입한 선생님 <span id="count-users"></span></h2>
+      <div class="admin-h2-row">
+        <h2 class="admin-h2">가입한 선생님 <span id="count-users"></span></h2>
+        <div class="admin-tools">
+          <input type="text" id="user-search" placeholder="이름·소속·지역·원 이름 검색">
+          <button class="csv-btn" id="users-csv">CSV 다운로드</button>
+        </div>
+      </div>
       <div class="table-wrap">
         <table id="users-table">
           <thead><tr><th>이름</th><th>소속</th><th>지역</th><th>원 이름</th><th>이메일</th><th>가입일</th></tr></thead>
@@ -34,12 +40,27 @@
         </table>
       </div>
 
-      <h2 class="admin-h2">후원 기록 <span id="count-dons"></span></h2>
+      <div class="admin-h2-row">
+        <h2 class="admin-h2">후원 기록 <span id="count-dons"></span></h2>
+        <div class="admin-tools">
+          <button class="csv-btn" id="dons-csv">CSV 다운로드</button>
+        </div>
+      </div>
       <div class="table-wrap">
         <table id="dons-table">
           <thead><tr><th>일시</th><th>이름</th><th>소속·원</th><th>지역</th><th>방법</th></tr></thead>
           <tbody></tbody>
         </table>
+      </div>
+
+      <h2 class="admin-h2">운영 관리</h2>
+      <div class="ops-card">
+        <p class="ops-desc">오래된 주문 기록을 정리해 데이터베이스를 가볍게 유지하세요. 선택한 날짜 <b>이전</b>의 주문이 모두 삭제됩니다 (되돌릴 수 없어요).</p>
+        <div class="ops-row">
+          <input type="date" id="cleanup-date">
+          <button class="gate-primary" id="cleanup-btn">이전 주문 정리하기</button>
+        </div>
+        <p class="ops-result" id="cleanup-result"></p>
       </div>
     </section>
   </main>
