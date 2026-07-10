@@ -209,6 +209,21 @@ async function loadAdmin() {
   document.getElementById("users-csv").onclick = exportUsersCSV;
   document.getElementById("dons-csv").onclick = exportDonsCSV;
   setupCleanup();
+  setupNav();
+}
+
+/* ── 좌측 메뉴 ↔ 패널 전환 ── */
+function setupNav() {
+  const items = document.querySelectorAll(".nav-item");
+  const panels = document.querySelectorAll(".panel");
+  const show = (name) => {
+    items.forEach(i => i.classList.toggle("is-active", i.dataset.panel === name));
+    panels.forEach(p => p.classList.toggle("is-active", p.id === "panel-" + name));
+  };
+  items.forEach(i => { i.onclick = () => show(i.dataset.panel); });
+  document.querySelectorAll("[data-jump]").forEach(el => { el.onclick = () => show(el.dataset.jump); });
+  const logout = document.getElementById("admin-logout");
+  if (logout) logout.onclick = async () => { await window.signOutUser(); location.reload(); };
 }
 
 function begin() {

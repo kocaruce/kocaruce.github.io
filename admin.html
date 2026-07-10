@@ -20,61 +20,94 @@
   <main id="admin-main">
     <div id="admin-gate" class="admin-note">확인 중…</div>
 
-    <section id="admin-content" hidden>
-      <div class="admin-cards">
-        <div class="stat"><span class="stat-label">가입 선생님</span><span class="stat-num" id="stat-users">–</span></div>
-        <div class="stat"><span class="stat-label">후원 기록</span><span class="stat-num" id="stat-dons">–</span></div>
-      </div>
+    <div id="admin-content" class="admin-shell" hidden>
+      <!-- ── 좌측 메뉴 ── -->
+      <aside id="admin-nav">
+        <nav class="nav-list">
+          <button class="nav-item is-active" data-panel="dashboard"><span class="ni-ic">📊</span> 대시보드</button>
+          <button class="nav-item" data-panel="users"><span class="ni-ic">👥</span> 회원 관리</button>
+          <button class="nav-item" data-panel="dons"><span class="ni-ic">💚</span> 후원 관리</button>
+          <div class="nav-group">
+            <div class="nav-group-label">놀이 관리</div>
+            <button class="nav-item sub" data-panel="cafe"><span class="ni-ic">🧃</span> 카페 놀이</button>
+          </div>
+        </nav>
+        <button id="admin-logout" class="nav-logout">로그아웃</button>
+      </aside>
 
-      <div class="admin-h2-row">
-        <h2 class="admin-h2">가입한 선생님 <span id="count-users"></span></h2>
-        <div class="admin-tools">
-          <input type="text" id="user-search" placeholder="이름·소속·지역·원 이름 검색">
-          <button class="csv-btn" id="users-csv">CSV 다운로드</button>
-        </div>
-      </div>
-      <div class="table-wrap">
-        <table id="users-table">
-          <thead><tr><th>이름</th><th>소속</th><th>지역</th><th>원 이름</th><th>이메일</th><th>가입일</th></tr></thead>
-          <tbody></tbody>
-        </table>
-      </div>
+      <!-- ── 콘텐츠 패널 ── -->
+      <div class="admin-panels">
+        <!-- 대시보드 -->
+        <section class="panel is-active" id="panel-dashboard">
+          <h1 class="panel-title">대시보드</h1>
+          <div class="admin-cards">
+            <button class="stat" data-jump="users"><span class="stat-label">가입 선생님</span><span class="stat-num" id="stat-users">–</span></button>
+            <button class="stat" data-jump="dons"><span class="stat-label">후원 기록</span><span class="stat-num" id="stat-dons">–</span></button>
+          </div>
+          <p class="panel-hint">왼쪽 메뉴에서 회원·후원·놀이별 관리 기능을 이용하세요. 카드도 눌러서 이동할 수 있어요.</p>
+        </section>
 
-      <div class="admin-h2-row">
-        <h2 class="admin-h2">후원 기록 <span id="count-dons"></span></h2>
-        <div class="admin-tools">
-          <button class="csv-btn" id="dons-csv">CSV 다운로드</button>
-        </div>
-      </div>
-      <div class="table-wrap">
-        <table id="dons-table">
-          <thead><tr><th>일시</th><th>이름</th><th>소속·원</th><th>지역</th><th>방법</th></tr></thead>
-          <tbody></tbody>
-        </table>
-      </div>
+        <!-- 회원 관리 -->
+        <section class="panel" id="panel-users">
+          <div class="admin-h2-row">
+            <h1 class="panel-title">회원 관리 <span id="count-users"></span></h1>
+            <div class="admin-tools">
+              <input type="text" id="user-search" placeholder="이름·소속·지역·원 이름 검색">
+              <button class="csv-btn" id="users-csv">CSV 다운로드</button>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table id="users-table">
+              <thead><tr><th>이름</th><th>소속</th><th>지역</th><th>원 이름</th><th>이메일</th><th>가입일</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </section>
 
-      <h2 class="admin-h2">운영 관리</h2>
-      <div class="ops-card">
-        <p class="ops-desc">오래된 주문 기록을 정리해 데이터베이스를 가볍게 유지하세요. 선택한 날짜 <b>이전</b>의 주문이 모두 삭제됩니다 (되돌릴 수 없어요).</p>
-        <div class="ops-row">
-          <input type="date" id="cleanup-date">
-          <button class="gate-primary" id="cleanup-btn">이전 주문 정리하기</button>
-        </div>
-        <p class="ops-result" id="cleanup-result"></p>
-      </div>
+        <!-- 후원 관리 -->
+        <section class="panel" id="panel-dons">
+          <div class="admin-h2-row">
+            <h1 class="panel-title">후원 관리 <span id="count-dons"></span></h1>
+            <div class="admin-tools">
+              <button class="csv-btn" id="dons-csv">CSV 다운로드</button>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table id="dons-table">
+              <thead><tr><th>일시</th><th>이름</th><th>소속·원</th><th>지역</th><th>방법</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
 
-      <div class="ops-card">
-        <p class="ops-desc">예전 후원 기록에 남아 있는 <b>이름·이메일 등 개인정보</b>를 한 번에 비웁니다. 후원 건수·시각·방법은 그대로 유지돼요 (되돌릴 수 없어요).</p>
-        <div class="ops-row">
-          <button class="gate-primary" id="don-cleanup-btn">후원기록 개인정보 정리</button>
-        </div>
-        <p class="ops-result" id="don-cleanup-result"></p>
+          <h2 class="admin-h2">개인정보 정리</h2>
+          <div class="ops-card">
+            <p class="ops-desc">예전 후원 기록에 남아 있는 <b>이름·이메일 등 개인정보</b>를 한 번에 비웁니다. 후원 건수·시각·방법은 그대로 유지돼요 (되돌릴 수 없어요).</p>
+            <div class="ops-row">
+              <button class="gate-primary" id="don-cleanup-btn">후원기록 개인정보 정리</button>
+            </div>
+            <p class="ops-result" id="don-cleanup-result"></p>
+          </div>
+        </section>
+
+        <!-- 카페 놀이 -->
+        <section class="panel" id="panel-cafe">
+          <h1 class="panel-title">카페 놀이 <span class="panel-sub">오로라 주스 가게</span></h1>
+          <h2 class="admin-h2">주문 기록 정리</h2>
+          <div class="ops-card">
+            <p class="ops-desc">오래된 주문 기록을 정리해 데이터베이스를 가볍게 유지하세요. 선택한 날짜 <b>이전</b>의 주문이 모두 삭제됩니다 (되돌릴 수 없어요).</p>
+            <div class="ops-row">
+              <input type="date" id="cleanup-date">
+              <button class="gate-primary" id="cleanup-btn">이전 주문 정리하기</button>
+            </div>
+            <p class="ops-result" id="cleanup-result"></p>
+          </div>
+        </section>
       </div>
-    </section>
+    </div>
   </main>
 
   <script src="js/firebase-config.js"></script>
   <script type="module" src="js/auth.js?v=gis2"></script>
-  <script src="js/admin.js?v=gis2"></script>
+  <script src="js/admin.js?v=gis3"></script>
 </body>
 </html>
