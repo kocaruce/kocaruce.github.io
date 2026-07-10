@@ -86,37 +86,78 @@
 .g-steps { margin: 4px 0 0; padding-left: 22px; }
 .g-steps li { padding: 5px 0; }
 
-/* ── 화면별 사용법 스텝 카드 ── */
-.g-step-card {
-  display: flex; gap: 14px; align-items: flex-start;
-  background: var(--surface); border: 1px solid var(--line);
-  border-radius: 18px; box-shadow: var(--shadow);
-  padding: 18px 20px; margin-top: 12px;
+/* ── 화면별 사용법: 슬라이드(캐러셀) ── */
+.g-slider { position: relative; margin-top: 12px; }
+.g-track {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding: 4px;
+  margin: -4px;
 }
-.g-step-no {
-  flex: none;
-  width: 40px; height: 40px; border-radius: 50%;
-  background: var(--green); color: #fff;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 19px; font-weight: 800;
-}
-.g-staff .g-step-no { background: var(--coral); font-size: 20px; }
-.g-step-body { min-width: 0; }
-.g-step-body h3 { font-size: 17px; font-weight: 800; margin: 6px 0 6px; }
-.g-step-body p { font-size: 14.5px; line-height: 1.75; color: var(--ink); }
-.g-step-body b { color: var(--green-deep); }
-.g-staff .g-step-body b { color: var(--coral-deep); }
+.g-track::-webkit-scrollbar { display: none; }
 
-/* 단계 안 그림 */
-.g-visual {
-  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
-  background: #F4F9EE; border-radius: 14px;
-  padding: 14px 16px; margin: 12px 0 2px;
+.g-slide {
+  flex: 0 0 100%;
+  scroll-snap-align: center;
+  margin: 0;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
 }
-.g-visual img { height: 54px; }
-.g-visual img.coin { height: 30px; }
-.g-visual-plus, .g-visual-label { font-size: 16px; font-weight: 800; color: var(--green-deep); }
-.g-money img { height: 26px; }
+.g-slide-badge {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 15px; font-weight: 800; color: var(--green-deep);
+  padding: 15px 18px 12px;
+}
+.g-slide-badge.staff { color: var(--coral-deep); }
+.g-slide-badge .n {
+  flex: none;
+  min-width: 26px; height: 26px; padding: 0 6px;
+  border-radius: 13px; background: var(--green); color: #fff;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 15px; font-weight: 800;
+}
+.g-slide-badge.staff .n { background: var(--coral); }
+.g-slide img {
+  display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover;
+  background: #EAF5E4; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+}
+.g-slide figcaption {
+  padding: 14px 18px 18px;
+  font-size: 14.5px; line-height: 1.75; color: var(--ink);
+}
+.g-slide figcaption b { color: var(--green-deep); }
+.g-slide-staff figcaption b { color: var(--coral-deep); }
+
+/* 좌우 화살표 (태블릿·데스크톱) */
+.g-arrow {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 44px; height: 44px; border-radius: 50%;
+  border: 1px solid var(--line); background: rgba(255,255,255,.94);
+  box-shadow: var(--shadow);
+  font-size: 26px; line-height: 1; color: var(--green-deep);
+  cursor: pointer; z-index: 2;
+  display: flex; align-items: center; justify-content: center;
+}
+.g-arrow.prev { left: -6px; }
+.g-arrow.next { right: -6px; }
+.g-arrow:disabled { opacity: 0; pointer-events: none; }
+@media (hover: none) { .g-arrow { display: none; } } /* 터치 기기는 스와이프로 */
+
+/* 하단 점 인디케이터 */
+.g-dots { display: flex; justify-content: center; gap: 8px; margin-top: 16px; }
+.g-dot {
+  width: 9px; height: 9px; border-radius: 50%;
+  border: none; background: #cfe0bd; cursor: pointer; padding: 0;
+  transition: width .2s, background .2s;
+}
+.g-dot.on { width: 24px; border-radius: 5px; background: var(--green); }
 
 /* ── 연령별 팁 ── */
 .g-age ul { margin: 0; padding-left: 18px; }

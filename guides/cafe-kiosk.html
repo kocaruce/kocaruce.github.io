@@ -115,73 +115,60 @@
 
     <section class="g-section" id="howto">
       <h2>화면별 사용법</h2>
-      <p class="g-section-sub">손님(키오스크) 흐름 순서대로 안내해요.</p>
+      <p class="g-section-sub">실제 화면을 넘겨보며 따라 해보세요. 좌우로 밀거나 화살표를 눌러요.</p>
 
-      <div class="g-step-card">
-        <div class="g-step-no">1</div>
-        <div class="g-step-body">
-          <h3>시작 화면</h3>
-          <p>아이들이 그린 간판이 반겨줘요. <b>화면 아무 곳이나 터치</b>하면 주문이 시작돼요.</p>
+      <div class="g-slider" id="slider">
+        <div class="g-track" id="track">
+
+          <figure class="g-slide">
+            <div class="g-slide-badge"><span class="n">1</span> 손님 · 시작 화면</div>
+            <img src="../assets/guide/screens/01-start.jpg" alt="아이들이 그린 오로라 주스 가게 간판이 있는 시작 화면" loading="lazy">
+            <figcaption>아이들이 그린 간판이 반겨줘요. <b>화면 아무 곳이나 터치</b>하면 주문이 시작돼요.</figcaption>
+          </figure>
+
+          <figure class="g-slide">
+            <div class="g-slide-badge"><span class="n">2</span> 손님 · 메뉴 고르기</div>
+            <img src="../assets/guide/screens/02-order.jpg" alt="주스·에이드·스무디·라떼·커피 티 탭과 음료 메뉴판" loading="lazy">
+            <figcaption>위쪽 <b>탭</b>으로 메뉴판을 넘기고, 음료 그림을 <b>톡 누르면 담겨요</b>(여러 번 누르면 여러 잔!). 가격은 지폐·동전 <b>그림 개수</b>로 표시돼 함께 세어볼 수 있어요.</figcaption>
+          </figure>
+
+          <figure class="g-slide">
+            <div class="g-slide-badge"><span class="n">3</span> 손님 · 주문 목록</div>
+            <img src="../assets/guide/screens/03-cart.jpg" alt="담은 음료 목록과 수량 조절, 합계 금액" loading="lazy">
+            <figcaption>오른쪽 아래 <b>장바구니</b>를 누르면 담은 음료가 보여요. <b>+/−</b>로 수량을 바꾸고 합계를 확인한 뒤 <b>결제하기</b>!</figcaption>
+          </figure>
+
+          <figure class="g-slide">
+            <div class="g-slide-badge"><span class="n">4</span> 손님 · 결제 방법</div>
+            <img src="../assets/guide/screens/04-pay.jpg" alt="카드결제와 현금결제 선택 화면" loading="lazy">
+            <figcaption>아이가 <b>카드결제</b> 또는 <b>현금결제</b>를 골라요. 큼직한 두 버튼으로 쉽게 선택해요.</figcaption>
+          </figure>
+
+          <figure class="g-slide">
+            <div class="g-slide-badge"><span class="n">5</span> 손님 · 결제 진행</div>
+            <img src="../assets/guide/screens/05-card.jpg" alt="카드를 넣어주세요 안내 화면" loading="lazy">
+            <figcaption>카드는 "카드를 넣어주세요 → 결제 중 → 카드를 제거해주세요"로 진짜처럼 진행돼요. 현금은 "직원에게 주세요" — <b>놀이 화폐를 건네는 순간</b>이에요!</figcaption>
+          </figure>
+
+          <figure class="g-slide">
+            <div class="g-slide-badge"><span class="n">6</span> 손님 · 주문 완료</div>
+            <img src="../assets/guide/screens/06-done.jpg" alt="주문번호와 함께 주문이 완료되었습니다 안내" loading="lazy">
+            <figcaption>"주문이 완료되었습니다"와 함께 <b>주문번호</b>가 나와요. 잠시 후 자동으로 처음 화면으로 돌아가 다음 친구가 이어서 주문해요.</figcaption>
+          </figure>
+
+          <figure class="g-slide g-slide-staff">
+            <div class="g-slide-badge staff"><span class="n">👩‍🍳</span> 바리스타 · 포스 화면</div>
+            <img src="../assets/guide/screens/07-pos.jpg" alt="실시간으로 들어온 주문 카드가 표시된 바리스타 화면" loading="lazy">
+            <figcaption>주문이 끝나면 <b>딩동 소리와 함께 카드가 실시간</b>으로 떠요. 메뉴 그림과 💳카드/💵현금 표시를 보고 안내한 뒤, 음료를 다 만들면 <b>완료</b>를 눌러요.</figcaption>
+          </figure>
+
         </div>
+
+        <button class="g-arrow prev" id="slide-prev" aria-label="이전 화면">‹</button>
+        <button class="g-arrow next" id="slide-next" aria-label="다음 화면">›</button>
       </div>
 
-      <div class="g-step-card">
-        <div class="g-step-no">2</div>
-        <div class="g-step-body">
-          <h3>주문 화면 — 메뉴 고르기</h3>
-          <p>위쪽 <b>카테고리 탭</b>(주스·에이드·스무디·라떼·커피 티)을 눌러 메뉴판을 넘겨요. 음료 그림을 <b>톡 누르면 장바구니에 담겨요</b> — 여러 번 누르면 여러 잔!</p>
-          <div class="g-visual">
-            <img src="../assets/guide/image15.svg" alt="망고 주스">
-            <img src="../assets/guide/image51.png" alt="바나나 우유">
-            <img src="../assets/guide/image24.svg" alt="레몬 주스">
-            <span class="g-visual-plus">→ 🛒</span>
-          </div>
-          <p class="g-note">가격은 천원 지폐와 100원 동전 <b>그림 개수</b>로 표시돼요. 아이와 함께 세어보세요!</p>
-          <div class="g-visual g-money">
-            <img src="../assets/guide/image33.svg" alt="천원 지폐">
-            <img src="../assets/guide/image33.svg" alt="천원 지폐">
-            <img class="coin" src="../assets/guide/100won.png" alt="백원 동전">
-            <span class="g-visual-label">= 2,100원</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="g-step-card">
-        <div class="g-step-no">3</div>
-        <div class="g-step-body">
-          <h3>주문 목록 — 확인하고 결제</h3>
-          <p>오른쪽 아래 <b>장바구니 버튼</b>을 누르면 담은 음료가 보여요. <b>+/− 버튼</b>으로 수량을 바꾸고, 합계를 지폐·동전 그림으로 함께 세어본 뒤 <b>결제하기</b>를 눌러요.</p>
-        </div>
-      </div>
-
-      <div class="g-step-card">
-        <div class="g-step-no">4</div>
-        <div class="g-step-body">
-          <h3>결제 화면 — 카드 or 현금</h3>
-          <p>아이가 <b>카드결제</b> 또는 <b>현금결제</b>를 골라요. 카드는 "카드를 넣어주세요 → 결제 중 → 카드를 제거해주세요"로 진짜처럼 진행되고, 현금은 "직원에게 주세요"라고 안내돼요 (놀이 화폐를 건네는 순간이에요!).</p>
-          <div class="g-visual">
-            <img src="../assets/guide/image71.png" alt="카드">
-            <img src="../assets/guide/image73.png" alt="현금">
-          </div>
-        </div>
-      </div>
-
-      <div class="g-step-card">
-        <div class="g-step-no">5</div>
-        <div class="g-step-body">
-          <h3>주문 완료 — 주문번호 받기</h3>
-          <p>"주문이 완료되었습니다"와 함께 <b>주문번호</b>가 나와요. 잠시 후 자동으로 처음 화면으로 돌아가 다음 친구가 이어서 주문할 수 있어요.</p>
-        </div>
-      </div>
-
-      <div class="g-step-card g-staff">
-        <div class="g-step-no">👩‍🍳</div>
-        <div class="g-step-body">
-          <h3>바리스타 화면(포스) — 태블릿 2</h3>
-          <p>주문이 끝나는 순간 <b>딩동 소리와 함께 주문 카드가 실시간으로</b> 나타나요. 메뉴마다 그림이 있어 글을 몰라도 만들 수 있고, 💳카드/💵현금 표시를 보고 "카드 여기에 꽂아주세요~" 하고 안내해요. 음료를 다 만들면 <b>완료</b> 버튼!</p>
-          <p class="g-note">선생님은 <b>주문 내역</b> 화면에서 날짜별 주문과 그날의 매출(놀이 결산!)을 볼 수 있어요.</p>
-        </div>
-      </div>
+      <div class="g-dots" id="slide-dots" role="tablist" aria-label="화면 이동"></div>
     </section>
 
     <section class="g-section" id="ages">
@@ -239,5 +226,66 @@
     <span class="sep">·</span>
     <span>선생님과 아이들의 놀이 상자</span>
   </footer>
+
+  <script>
+  (function () {
+    const track = document.getElementById("track");
+    const slides = [...track.querySelectorAll(".g-slide")];
+    const dotsWrap = document.getElementById("slide-dots");
+    const prev = document.getElementById("slide-prev");
+    const next = document.getElementById("slide-next");
+    let idx = 0;
+
+    slides.forEach((_, i) => {
+      const b = document.createElement("button");
+      b.className = "g-dot";
+      b.setAttribute("role", "tab");
+      b.setAttribute("aria-label", `${i + 1}번째 화면`);
+      b.onclick = () => goto(i);
+      dotsWrap.appendChild(b);
+    });
+    const dots = [...dotsWrap.children];
+
+    function goto(i) {
+      idx = Math.max(0, Math.min(slides.length - 1, i));
+      const left = slides[idx].offsetLeft - slides[0].offsetLeft;
+      track.scrollTo({ left, behavior: "smooth" });
+      update();
+    }
+    function update() {
+      dots.forEach((d, i) => d.classList.toggle("on", i === idx));
+      prev.disabled = idx === 0;
+      next.disabled = idx === slides.length - 1;
+    }
+
+    prev.onclick = () => goto(idx - 1);
+    next.onclick = () => goto(idx + 1);
+
+    // 스와이프/스크롤로 넘길 때 현재 슬라이드 감지 (슬라이드0 기준 좌표로 통일)
+    let t;
+    track.addEventListener("scroll", () => {
+      clearTimeout(t);
+      t = setTimeout(() => {
+        const base = slides[0].offsetLeft;
+        const c = track.scrollLeft + track.clientWidth / 2;
+        let best = 0, bestD = Infinity;
+        slides.forEach((s, i) => {
+          const mid = (s.offsetLeft - base) + s.offsetWidth / 2;
+          const d = Math.abs(mid - c);
+          if (d < bestD) { bestD = d; best = i; }
+        });
+        idx = best; update();
+      }, 90);
+    }, { passive: true });
+
+    // 키보드 좌우
+    document.getElementById("slider").addEventListener("keydown", (e) => {
+      if (e.key === "ArrowLeft") { e.preventDefault(); goto(idx - 1); }
+      if (e.key === "ArrowRight") { e.preventDefault(); goto(idx + 1); }
+    });
+
+    update();
+  })();
+  </script>
 </body>
 </html>
