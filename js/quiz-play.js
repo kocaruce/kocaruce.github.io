@@ -9,6 +9,8 @@
   let idx = 0, CARDS = [], inputs = {}, ans = {};
   // 입력 모드: "cards"(글자 카드 선택, 기본) | "type"(직접 타이핑, 심화)
   let mode = "cards", selKey = null;
+  // 단어 단위 선택(크로스워드식): WORDS[i] = {keys, dir, clue, n}, actW = 현재 단어 인덱스
+  let WORDS = [], cellWords = {}, actW = -1;
 
   const COLORS = [['#FFD36B', '#FFE9A8'], ['#9CD6F5', '#C9EAFB'], ['#FF9E8A', '#FFC9BE'], ['#A9DD7B', '#CFEEAE'],
     ['#C9A7E8', '#E2CFF4'], ['#FFB85C', '#FFD49A'], ['#7FD0C4', '#B4E6DE'], ['#F4A0C0', '#FBC9DC']];
@@ -82,6 +84,22 @@
       board.appendChild(div);
     }
 
+    // 단어 목록 (번호순, 같은 번호는 가로 먼저) — 셀 탭 시 단어 하이라이트·힌트 바에 사용
+    WORDS = (quiz.words || []).filter(w => w && w.answer && w.dir).map(w => {
+      const keys = [];
+      const chars = [...String(w.answer)];
+      for (let i = 0; i < chars.length; i++) {
+        const r = w.dir === "세로" ? w.r + i : w.r;
+        const c = w.dir === "세로" ? w.c : w.c + i;
+        keys.push(r + "_" + c);
+      }
+      return { keys, dir: w.dir, clue: w.clue || "", n: p.nums[w.r + "_" + w.c] || 0 };
+    });
+    WORDS.sort((a, b) => (a.n - b.n) || ((a.dir === "가로" ? 0 : 1) - (b.dir === "가로" ? 0 : 1)));
+    cellWords = {};
+    WORDS.forEach((w, i) => w.keys.forEach(k => { (cellWords[k] = cellWords[k] || []).push(i); }));
+    actW = -1;
+
     CARDS = p.cards; idx = 0;
     const prog = $("progress"); prog.innerHTML = "";
     CARDS.forEach((cd, i) => {
@@ -106,15 +124,50 @@
     const tray = $("tray");
     if (tray) tray.hidden = (m !== "cards");
     if (m !== "cards") selectCell(null);
+    updateClueBar();
   }
 
-  function selectCell(key) {
-    selKey = key;
-    $("board").querySelectorAll(".cell.sel").forEach(d => d.classList.remove("sel"));
-    if (key) {
-      const d = $("board").querySelector('[data-key="' + key + '"]');
-      if (d) d.classList.add("sel");
+  // 셀 선택: 속한 단어 전체를 하이라이트하고 힌트 바를 갱신.
+  // 같은 칸을 다시 탭하면 교차하는 다른 단어(가로↔세로)로 전환.
+  function selectCell(key, wi) {
+    const board = $("board");
+    board.querySelectorAll(".cell.sel").forEach(d => d.classList.remove("sel"));
+    board.querySelectorAll(".cell.word").forEach(d => d.classList.remove("word"));
+    if (key == null) { selKey = null; actW = -1; updateClueBar(); return; }
+    const list = cellWords[key] || [];
+    if (wi == null) {
+      if (list.length > 1 && selKey === key && list.includes(actW)) wi = list[(list.indexOf(actW) + 1) % list.length];
+      else if (list.includes(actW)) wi = actW;
+      else wi = list.length ? list[0] : -1;
     }
+    selKey = key; actW = (wi == null ? -1 : wi);
+    if (actW >= 0 && WORDS[actW]) WORDS[actW].keys.forEach(k => {
+      const d = board.querySelector('[data-key="' + k + '"]');
+      if (d) d.classList.add("word");
+    });
+    const d = board.querySelector('[data-key="' + key + '"]');
+    if (d) d.classList.add("sel");
+    updateClueBar();
+  }
+
+  function updateClueBar() {
+    const bar = $("cluebar");
+    if (!bar) return;
+    bar.hidden = (mode !== "cards");
+    const t = $("clueTxt");
+    if (actW < 0 || !WORDS[actW]) { t.innerHTML = "채울 칸을 콕 눌러 주세요 👆"; return; }
+    const w = WORDS[actW];
+    t.innerHTML = '<b>' + w.n + ' ' + esc(w.dir) + '</b> · ' + esc(w.clue);
+  }
+
+  // 힌트 바 ◀▶: 이전/다음 단어의 첫 빈칸으로 이동
+  function moveWord(step) {
+    if (!WORDS.length) return;
+    const from = actW < 0 ? (step > 0 ? -1 : 0) : actW;
+    const wi = (from + step + WORDS.length) % WORDS.length;
+    const w = WORDS[wi];
+    const firstEmpty = w.keys.find(k => inputs[k] && !(inputs[k].value || "").trim()) || w.keys[0];
+    selectCell(firstEmpty, wi);
   }
 
   // 트레이: 퍼즐의 글자(중복 제거) + 방해 글자 몇 개를 섞어 보여줌
@@ -137,10 +190,19 @@
     tray.querySelectorAll(".lcard").forEach(b => b.onclick = () => {
       if (!selKey) { $("result").textContent = "먼저 채울 칸을 콕 눌러 주세요 👆"; return; }
       const cellDiv = $("board").querySelector('[data-key="' + selKey + '"]');
-      inputs[selKey].value = b.classList.contains("eraser") ? "" : b.textContent;
+      const isErase = b.classList.contains("eraser");
+      inputs[selKey].value = isErase ? "" : b.textContent;
       cellDiv.classList.remove("correct", "wrong");
       $("result").textContent = "";
-      selectCell(null);
+      // 채우면 같은 단어의 다음 칸으로 자동 이동 (지우개는 제자리 유지)
+      if (isErase) { selectCell(selKey, actW); return; }
+      const w = WORDS[actW];
+      if (w) {
+        const next = w.keys[w.keys.indexOf(selKey) + 1];
+        selectCell(next || selKey, actW);
+      } else {
+        selectCell(null);
+      }
     });
   }
 
@@ -215,6 +277,9 @@
     $("back-btn").onclick = () => renderSelect();
     const mb = $("modeBtn");
     if (mb) mb.onclick = () => setMode(mode === "cards" ? "type" : "cards");
+    const cp = $("cluePrev"), cn = $("clueNext");
+    if (cp) cp.onclick = () => moveWord(-1);
+    if (cn) cn.onclick = () => moveWord(1);
   }
 
   // ── 부팅 ──

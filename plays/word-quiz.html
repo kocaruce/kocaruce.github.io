@@ -154,6 +154,40 @@
     transition:transform .08s;touch-action:manipulation;}
   .lcard:active{transform:translate(2px,2px);box-shadow:1px 1px 0 rgba(59,46,32,.18);}
   .lcard.eraser{background:#F3EEFA;}
+  /* ===== 크로스워드식 단어 선택 ===== */
+  .cell.word{background:#FFF3C6;}
+  .cell.word .cinp{background:transparent;}
+  .cluebar{display:flex;align-items:stretch;gap:10px;margin-top:14px;}
+  .cluebar[hidden]{display:none;}
+  .cluebar button{
+    width:48px;border:3px solid var(--line);border-radius:14px;background:#fff;color:var(--ink);
+    font-size:18px;cursor:pointer;box-shadow:3px 3px 0 rgba(59,46,32,.15);touch-action:manipulation;flex:none;
+  }
+  .cluebar button:active{transform:translate(1px,1px);box-shadow:1px 1px 0 rgba(59,46,32,.15);}
+  .cluebar-txt{
+    flex:1;min-width:0;background:#FFF8E7;border:3px solid var(--line);border-radius:14px;
+    padding:10px 14px;font-family:'Gaegu',sans-serif;font-size:19px;font-weight:700;line-height:1.35;
+    display:flex;align-items:center;
+  }
+  .cluebar-txt b{color:var(--tomato);margin-right:2px;flex:none;}
+
+  /* ===== 모바일(폰) 레이아웃 ===== */
+  @media(max-width:600px){
+    .panel{padding:16px 12px;}
+    .board{min-width:340px;}
+    .lcard{width:46px;height:46px;font-size:21px;border-radius:12px;}
+    .dock{
+      position:sticky;bottom:6px;z-index:5;
+      background:rgba(255,248,231,.97);padding:8px;border-radius:16px;
+      border:3px solid var(--line);box-shadow:0 -3px 12px rgba(59,46,32,.10);
+    }
+    .cluebar{margin-top:0;}
+    .tray{gap:8px;margin-top:10px;}
+    .cluebar-txt{font-size:16.5px;padding:8px 10px;}
+    .cluebar button{width:42px;}
+    .btn{font-size:19px;min-height:52px;min-width:96px;}
+    .mode-btn{font-size:14px;padding:5px 11px;}
+  }
 </style>
 </head>
 <body>
@@ -172,7 +206,14 @@
       <section class="panel">
         <div class="panel-title"><span class="dot-badge">?</span> 문제판 <button type="button" class="mode-btn" id="modeBtn">🃏 글자 카드</button></div>
         <div class="board-scroll"><div class="board" id="board"></div></div>
+        <div class="dock">
+        <div class="cluebar" id="cluebar">
+          <button type="button" id="cluePrev" aria-label="이전 낱말">◀</button>
+          <div class="cluebar-txt" id="clueTxt">채울 칸을 콕 눌러 주세요 👆</div>
+          <button type="button" id="clueNext" aria-label="다음 낱말">▶</button>
+        </div>
         <div class="tray" id="tray"></div>
+        </div>
         <div class="btnrow">
           <button class="btn btn-check" id="checkBtn">채점하기 ✓</button>
           <button class="btn btn-show" id="showBtn">정답 보기 ✨</button>
@@ -201,6 +242,6 @@
 <script src="../js/firebase-config.js"></script>
 <script type="module" src="../js/auth.js?v=gis2"></script>
 <script src="../js/quiz-model.js?v=wq1"></script>
-<script src="../js/quiz-play.js?v=wq2"></script>
+<script src="../js/quiz-play.js?v=wq3"></script>
 </body>
 </html>
