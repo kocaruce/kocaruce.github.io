@@ -144,7 +144,7 @@ td.empty { text-align: center; color: var(--muted); padding: 40px 0; }
 .wq-empty { color: var(--muted); font-size: 14px; padding: 20px 4px; }
 
 .wq-ed-head { display: flex; justify-content: space-between; margin-bottom: 16px; }
-.wq-ed-head .gate-primary { width: auto; padding: 10px 24px; }
+.wq-ed-head .gate-primary { width: auto; padding: 10px 24px; flex: none; }
 .wq-ed-meta { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 18px; }
 .wq-ed-meta label { display: flex; flex-direction: column; gap: 5px; font-size: 13px; font-weight: 700; color: var(--muted); }
 .wq-ed-meta input {
@@ -203,8 +203,15 @@ td.empty { text-align: center; color: var(--muted); padding: 40px 0; }
 .wq-word-del { flex: none; border: none; background: none; color: #c0402f; font-size: 15px; cursor: pointer; padding: 2px 6px; }
 
 /* 조사 놀이 편집기 */
-.sv-check { display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--ink); font-weight: 600; }
+/* .wq-ed-meta label(세로 배치) 규칙보다 우선하도록 선택자를 구체적으로 */
+.sv-check, .wq-ed-meta label.sv-check {
+  flex-direction: row; align-items: center; align-self: flex-end; gap: 8px;
+  font-size: 14px; color: var(--ink); font-weight: 600; display: flex;
+}
 .sv-check input { width: auto; margin: 0; }
+/* nth-child 기반 메타 label 규칙(flex:1, input width:100%)이 체크박스에 적용되지 않게 */
+.wq-ed-meta label.sv-check { flex: none; min-width: 0; }
+.wq-ed-meta label.sv-check input { width: auto; flex: none; }
 .sv-opts { display: flex; flex-direction: column; gap: 8px; margin: 14px 0 10px; }
 .sv-opt-row { display: flex; align-items: center; gap: 8px; }
 .sv-opt-row input {
@@ -217,6 +224,7 @@ td.empty { text-align: center; color: var(--muted); padding: 40px 0; }
   background: var(--surface); border: 1px solid var(--line); border-radius: 12px; cursor: pointer;
 }
 .sv-emoji-btn:hover { border-color: var(--green); }
+.sv-palette[hidden] { display: none; }
 .sv-palette {
   display: grid; grid-template-columns: repeat(auto-fill, minmax(44px, 1fr)); gap: 4px;
   background: var(--surface); border: 1px solid var(--line); border-radius: 14px;

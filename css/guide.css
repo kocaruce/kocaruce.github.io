@@ -135,8 +135,8 @@
 .g-slide figcaption b { color: var(--green-deep); }
 .g-slide-staff figcaption b { color: var(--coral-deep); }
 
-/* 좌우 화살표 (태블릿·데스크톱) */
-.g-arrow {
+/* 좌우 화살표 (태블릿·데스크톱) — .g-flow의 → 텍스트 화살표와 충돌하지 않게 슬라이더로 한정 */
+.g-slider .g-arrow {
   position: absolute; top: 50%; transform: translateY(-50%);
   width: 44px; height: 44px; border-radius: 50%;
   border: 1px solid var(--line); background: rgba(255,255,255,.94);
@@ -145,10 +145,10 @@
   cursor: pointer; z-index: 2;
   display: flex; align-items: center; justify-content: center;
 }
-.g-arrow.prev { left: -6px; }
-.g-arrow.next { right: -6px; }
-.g-arrow:disabled { opacity: 0; pointer-events: none; }
-@media (hover: none) { .g-arrow { display: none; } } /* 터치 기기는 스와이프로 */
+.g-slider .g-arrow.prev { left: -6px; }
+.g-slider .g-arrow.next { right: -6px; }
+.g-slider .g-arrow:disabled { opacity: 0; pointer-events: none; }
+@media (hover: none) { .g-slider .g-arrow { display: none; } } /* 터치 기기는 스와이프로 */
 
 /* 하단 점 인디케이터 */
 .g-dots { display: flex; justify-content: center; gap: 8px; margin-top: 16px; }
