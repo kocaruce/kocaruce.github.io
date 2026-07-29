@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="꿈 놀이터">
+  <title>꿈 놀이터</title>
+  <defs><clipPath id="dpTile"><rect width="64" height="64" rx="15"/></clipPath></defs>
+  <g clip-path="url(#dpTile)">
+    <rect width="64" height="64" rx="15" fill="#2A6C2E"/>
+    <g fill="none">
+      <path d="M4 54A28 28 0 0 1 60 54" stroke="#FFF8EC" stroke-width="7"/>
+      <path d="M12 54A20 20 0 0 1 52 54" stroke="#F0913D" stroke-width="7"/>
+      <path d="M20 54A12 12 0 0 1 44 54" stroke="#7BC8F0" stroke-width="7"/>
+    </g>
+  </g>
+</svg>

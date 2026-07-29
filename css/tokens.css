@@ -1,0 +1,119 @@
+/* ═══════════════════════════════════════════════════════════
+   꿈 놀이터 디자인 토큰
+   모든 페이지에서 style.css 보다 먼저 불러온다.
+   색·라운드·그림자·타입스케일의 단일 출처(single source of truth).
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── 디스플레이 서체 : LINE Seed KR (SIL OFL 1.1) ──
+   제목에만 쓴다. 본문은 Pretendard 유지. */
+@font-face {
+  font-family: 'LINESeedKR';
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.1/LINESeedKR-Bd.woff2') format('woff2');
+}
+
+:root {
+  /* ── 서체 ── */
+  --font-display: 'LINESeedKR', 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+  --font-body: 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+
+  /* ── 잉크 : 따뜻한 먹색 (순수 검정도, 초록빛 회색도 아니다) ── */
+  --ink: #241F1B;      /* 제목·본문 */
+  --ink-2: #5C554E;    /* 보조 설명 */
+  --ink-3: #756F67;    /* 캡션 — 흰 배경/페이지 배경 모두에서 AA(4.5:1) 통과하는 가장 밝은 값 */
+
+  /* ── 브랜드 그린 램프 (500 = 기존 브랜드색, 인지도 유지) ── */
+  --brand-50:  #F3FAF1;
+  --brand-100: #E3F3DE;
+  --brand-200: #C6E7BE;
+  --brand-300: #96D28C;
+  --brand-400: #63B95C;
+  --brand-500: #43A047;   /* 브랜드 코어. 면·아이콘용 — 흰 글자를 얹으면 3.3:1이라 버튼엔 쓰지 않는다 */
+  --brand-600: #328137;   /* 흰 글자 기준 4.9:1 — 채워진 버튼은 이 값을 쓴다 */
+  --brand-700: #2A6C2E;
+
+  /* ── 놀이 카테고리 색 ──
+     solid = 일러스트·강조용, tint = 배경 블록, ink = 틴트 위 텍스트(대비 확보) */
+  --cat-role: #F0913D;  --cat-role-tint: #FDF0E2;  --cat-role-ink: #97521A;  /* 역할 놀이 — 카페 */
+  --cat-lang: #7B62D6;  --cat-lang-tint: #EFEBFB;  --cat-lang-ink: #4E3A97;  /* 언어 놀이 — 낱말 퀴즈 */
+  --cat-num:  #2F8FD6;  --cat-num-tint:  #E4F1FB;  --cat-num-ink:  #1A5C8F;  /* 수·탐구 — 조사 놀이 */
+  --cat-art:  #E4638C;  --cat-art-tint:  #FCEBF1;  --cat-art-ink:  #A33359;  /* 예비 — 감각·예술 */
+
+  /* ── 서피스 ── */
+  --bg: #F7F6F2;         /* 따뜻한 뉴트럴. 초록 틴트를 걷어내야 그린이 산다 */
+  --surface: #FFFFFF;
+  --surface-2: #FBFAF7;
+  --line: #E9E6DF;
+  --line-strong: #D9D5CC;
+
+  /* ── 상태 ── */
+  --danger: #C0402F;
+  --danger-soft: #FBECE9;
+  --warn: #B8842A;
+  --warn-soft: #FDF3E0;
+
+  /* ── 라운드 ── */
+  --r-sm: 12px;
+  --r-md: 18px;
+  --r-lg: 28px;
+  --r-xl: 36px;
+  --r-pill: 999px;
+
+  /* ── 그림자 (잉크 기반이라 색이 탁해지지 않는다) ── */
+  --shadow-sm: 0 2px 8px rgba(36, 31, 27, .05);
+  --shadow-md: 0 8px 24px rgba(36, 31, 27, .07);
+  --shadow-lg: 0 18px 44px rgba(36, 31, 27, .10);
+
+  /* ── 타입 스케일 ── */
+  --t-display: clamp(34px, 6vw, 56px);
+  --t-h1: clamp(28px, 4.4vw, 40px);
+  --t-h2: 24px;
+  --t-h3: 19px;
+  --t-body: 16px;
+  --t-sm: 14px;
+  --t-xs: 12.5px;
+
+  /* ── 모션 ── */
+  --ease: cubic-bezier(.2, .8, .3, 1);
+  --dur: .18s;
+
+  /* ── 포커스 링 ── */
+  --focus: 0 0 0 3px rgba(67, 160, 71, .35);
+
+  /* ═══ 레거시 별칭 ═══
+     guide.css · admin.css 가 참조하는 이름들.
+     지우지 말 것 — 이 별칭 덕에 부속 화면이 자동으로 새 디자인을 상속한다. */
+  --green: var(--brand-500);
+  --green-deep: var(--brand-700);
+  --green-soft: var(--brand-100);
+  --coral: #EE8B52;
+  --coral-deep: #D9683A;
+  --muted: var(--ink-2);
+  --radius: var(--r-lg);
+  --shadow: var(--shadow-md);
+  --shadow-hover: var(--shadow-lg);
+}
+
+/* ── 전역 기본값 ── */
+h1, h2, h3, .u-display {
+  font-family: var(--font-display);
+  letter-spacing: -.02em;
+}
+
+/* 키보드 사용자에게만 링을 보여준다 (마우스 클릭에는 안 뜸) */
+:focus-visible {
+  outline: none;
+  box-shadow: var(--focus);
+}
+
+/* 모션 최소화 설정 존중 */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

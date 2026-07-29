@@ -24,26 +24,36 @@
 <meta name="twitter:description" content="손으로 만든 따뜻한 놀이를 한곳에서. 선생님과 아이들의 놀이 상자.">
 <meta name="twitter:image" content="https://rollplayground.com/assets/og-image.png">
 
+<link rel="preload" as="font" type="font/woff2" crossorigin href="https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.1/LINESeedKR-Bd.woff2">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/tokens.css?v=ds1">
+<link rel="stylesheet" href="css/style.css?v=ds1">
 </head>
 <body>
   <header id="hub-header">
     <div class="header-inner">
-      <div class="brand"><span class="brand-mark">🌈</span> 꿈 놀이터</div>
+      <div class="brand"><img class="brand-mark" src="/assets/brand/logo-mark.svg" alt="" width="34" height="34"> 꿈 놀이터</div>
       <button class="account" id="account-btn">로그인</button>
     </div>
   </header>
 
   <main id="hub">
     <section class="hero">
-      <span class="hero-badge">선생님을 위한 놀이 꾸러미 · 무료</span>
-      <h1>선생님과 아이들의<br>놀이 상자</h1>
-      <p>손으로 만든 따뜻한 놀이를 한곳에서. 로그인하면 언제든 꺼내 쓰고,<br>마음에 들면 커피 한 잔으로 응원해주세요.</p>
-      <a class="hero-guide-link" href="guides/cafe-kiosk.html">처음이신가요? 놀이 안내 보기 →</a>
+      <div class="hero-copy">
+        <span class="hero-badge">선생님을 위한 놀이 꾸러미 · 무료</span>
+        <h1>선생님과 아이들의<br>놀이 상자</h1>
+        <p>놀이 하나 준비하려면 손이 참 많이 가죠.<br>태블릿만 있으면 바로 시작하는 놀이를 한곳에 모았어요.<br>회원가입하면 전부 무료로 쓰실 수 있어요.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#tools">놀이 도구 보기</a>
+          <a class="btn btn-quiet" href="guides/cafe-kiosk.html">처음이신가요? 놀이법 보기</a>
+        </div>
+      </div>
+      <div class="hero-art">
+        <img src="/assets/hero.svg" alt="카페 놀이·낱말 퀴즈·조사 놀이 카드가 무지개 아래 놓인 그림" width="480" height="232">
+      </div>
     </section>
 
-    <section class="tools">
+    <section class="tools" id="tools">
       <div class="section-head">
         <h2>놀이 도구</h2>
         <span class="count">3개 운영 중 · 계속 추가돼요</span>
@@ -51,11 +61,11 @@
 
       <div class="tool-grid">
         <article class="tool-card">
-          <div class="tool-banner banner-cafe">
-            <img src="assets/aurora-sign.png" alt="오로라 주스 가게" class="banner-sign">
+          <div class="tool-banner">
+            <img class="banner-art" src="/assets/plays/cafe.svg" alt="" width="320" height="180">
           </div>
           <div class="tool-body">
-            <div class="tool-tag">역할 놀이</div>
+            <div class="tool-tag tag-role">역할 놀이</div>
             <h3>카페 놀이</h3>
             <p>아이들이 직접 주문하는 카페 놀이. 주문·결제부터 직원 화면까지.</p>
             <div class="tool-actions">
@@ -67,9 +77,11 @@
         </article>
 
         <article class="tool-card">
-          <div class="tool-banner banner-quiz"><span>🧩</span></div>
+          <div class="tool-banner">
+            <img class="banner-art" src="/assets/plays/word-quiz.svg" alt="" width="320" height="180">
+          </div>
           <div class="tool-body">
-            <div class="tool-tag">언어 놀이</div>
+            <div class="tool-tag tag-lang">언어 놀이</div>
             <h3>낱말 퀴즈</h3>
             <p>식재료 가로세로 낱말퀴즈. 글자를 채우며 즐기는 언어 놀이예요. (태블릿 가로 화면 추천)</p>
             <div class="tool-actions">
@@ -80,9 +92,11 @@
         </article>
 
         <article class="tool-card">
-          <div class="tool-banner banner-survey"><span>📊</span></div>
+          <div class="tool-banner">
+            <img class="banner-art" src="/assets/plays/survey.svg" alt="" width="320" height="180">
+          </div>
           <div class="tool-body">
-            <div class="tool-tag">수·탐구 놀이</div>
+            <div class="tool-tag tag-num">수·탐구 놀이</div>
             <h3>우리 반 조사 놀이</h3>
             <p>궁금한 걸 물어보고 그림을 콕! 투표할 때마다 그래프 블록이 실시간으로 쌓여요.</p>
             <div class="tool-actions">
@@ -118,7 +132,7 @@
 
   <footer id="hub-footer">
     <div class="footer-top">
-      <span>🌈 꿈 놀이터</span>
+      <span><img class="foot-mark" src="/assets/brand/logo-mark.svg" alt="" width="20" height="20"> 꿈 놀이터</span>
       <span class="sep">·</span>
       <span>선생님과 아이들의 놀이 상자</span>
     </div>
@@ -132,7 +146,7 @@
   <div id="toast" hidden>계좌번호를 복사했어요</div>
   <script src="js/firebase-config.js"></script>
   <script type="module" src="js/auth.js?v=sv1"></script>
-  <script src="js/auth-gate.js?v=seo1"></script>
+  <script src="js/auth-gate.js?v=ds1"></script>
   <script src="js/mypage.js"></script>
   <script src="js/hub.js?v=gis2"></script>
 </body>

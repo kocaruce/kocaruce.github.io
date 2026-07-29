@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180" width="320" height="180" role="img" aria-label="우리 반 조사 놀이">
+  <title>우리 반 조사 놀이</title>
+  <rect width="320" height="180" fill="#E4F1FB"/>
+
+  <!-- 배경 장식 -->
+  <circle cx="40" cy="36" r="11" fill="#2F8FD6" opacity=".2"/>
+  <circle cx="284" cy="44" r="7" fill="#2F8FD6" opacity=".28"/>
+
+  <!-- 1등 왕관 -->
+  <path d="M128 22 L138 34 L150 16 L162 34 L172 22 L168 44 H132 Z" fill="#FFC24D"/>
+
+  <!-- 블록 그래프 -->
+  <g>
+    <rect x="66"  y="123" width="44" height="21" rx="6" fill="#7BC8F0"/>
+    <rect x="66"  y="98"  width="44" height="21" rx="6" fill="#7BC8F0"/>
+    <rect x="66"  y="73"  width="44" height="21" rx="6" fill="#7BC8F0"/>
+
+    <rect x="128" y="123" width="44" height="21" rx="6" fill="#2F8FD6"/>
+    <rect x="128" y="98"  width="44" height="21" rx="6" fill="#2F8FD6"/>
+    <rect x="128" y="73"  width="44" height="21" rx="6" fill="#2F8FD6"/>
+    <rect x="128" y="48"  width="44" height="21" rx="6" fill="#2F8FD6"/>
+
+    <rect x="190" y="123" width="44" height="21" rx="6" fill="#7BC8F0"/>
+    <rect x="190" y="98"  width="44" height="21" rx="6" fill="#7BC8F0"/>
+  </g>
+
+  <!-- 바닥선 -->
+  <rect x="52" y="150" width="216" height="7" rx="3.5" fill="#2F8FD6" opacity=".28"/>
+</svg>

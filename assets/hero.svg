@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 76 480 232" width="480" height="232" role="img" aria-label="꿈 놀이터에 담긴 놀이 도구들">
+  <title>꿈 놀이터에 담긴 놀이 도구들</title>
+  <defs>
+    <filter id="dpCard" x="-30%" y="-30%" width="160%" height="170%">
+      <feDropShadow dx="0" dy="7" stdDeviation="9" flood-color="#241F1B" flood-opacity=".13"/>
+    </filter>
+
+    <!-- 놀이 카드 한 장의 틀 -->
+    <g id="dpCardBase">
+      <rect width="116" height="140" rx="18" fill="#FFFFFF"/>
+    </g>
+  </defs>
+
+  <!-- 배경 무지개 아치 -->
+  <g fill="none">
+    <path d="M10 320A230 230 0 0 1 470 320" stroke="#FBE0C2" stroke-width="30"/>
+    <path d="M44 320A196 196 0 0 1 436 320" stroke="#D7EBD2" stroke-width="30"/>
+    <path d="M78 320A162 162 0 0 1 402 320" stroke="#CFE7F7" stroke-width="30"/>
+  </g>
+
+  <!-- 왼쪽 : 카페 놀이 -->
+  <g transform="translate(52 150) rotate(-9 58 70)" filter="url(#dpCard)">
+    <rect width="116" height="140" rx="18" fill="#FFFFFF"/>
+    <path d="M0 18A18 18 0 0 1 18 0H98A18 18 0 0 1 116 18V68H0Z" fill="#FDF0E2"/>
+    <rect x="53" y="16" width="10" height="8" rx="3" fill="#F0913D"/>
+    <rect x="36" y="23" width="44" height="12" rx="6" fill="#F0913D"/>
+    <path d="M40 37H76L73 62H43Z" fill="#FFFFFF"/>
+    <path d="M41.6 46H74.4L73.8 54H42.2Z" fill="#F0913D" opacity=".38"/>
+    <rect x="16" y="84" width="62" height="9" rx="4.5" fill="#241F1B" opacity=".17"/>
+    <rect x="16" y="101" width="84" height="7" rx="3.5" fill="#241F1B" opacity=".09"/>
+    <rect x="16" y="115" width="52" height="7" rx="3.5" fill="#241F1B" opacity=".09"/>
+  </g>
+
+  <!-- 오른쪽 : 조사 놀이 -->
+  <g transform="translate(312 150) rotate(9 58 70)" filter="url(#dpCard)">
+    <rect width="116" height="140" rx="18" fill="#FFFFFF"/>
+    <path d="M0 18A18 18 0 0 1 18 0H98A18 18 0 0 1 116 18V68H0Z" fill="#E4F1FB"/>
+    <rect x="34" y="40" width="16" height="20" rx="4" fill="#7BC8F0"/>
+    <rect x="54" y="26" width="16" height="34" rx="4" fill="#2F8FD6"/>
+    <rect x="74" y="46" width="16" height="14" rx="4" fill="#7BC8F0"/>
+    <rect x="16" y="84" width="70" height="9" rx="4.5" fill="#241F1B" opacity=".17"/>
+    <rect x="16" y="101" width="84" height="7" rx="3.5" fill="#241F1B" opacity=".09"/>
+    <rect x="16" y="115" width="46" height="7" rx="3.5" fill="#241F1B" opacity=".09"/>
+  </g>
+
+  <!-- 가운데 : 낱말 퀴즈 -->
+  <g transform="translate(182 128)" filter="url(#dpCard)">
+    <rect width="116" height="140" rx="18" fill="#FFFFFF"/>
+    <path d="M0 18A18 18 0 0 1 18 0H98A18 18 0 0 1 116 18V68H0Z" fill="#EFEBFB"/>
+    <rect x="35" y="15" width="21" height="21" rx="5" fill="#FFFFFF"/>
+    <rect x="59" y="15" width="21" height="21" rx="5" fill="#7B62D6"/>
+    <rect x="35" y="39" width="21" height="21" rx="5" fill="#7B62D6"/>
+    <rect x="59" y="39" width="21" height="21" rx="5" fill="#FFFFFF" stroke="#F0913D" stroke-width="3"/>
+    <rect x="65" y="22" width="9" height="7" rx="2.5" fill="#FFFFFF" opacity=".92"/>
+    <rect x="41" y="46" width="9" height="7" rx="2.5" fill="#FFFFFF" opacity=".92"/>
+    <rect x="16" y="84" width="56" height="9" rx="4.5" fill="#241F1B" opacity=".17"/>
+    <rect x="16" y="101" width="84" height="7" rx="3.5" fill="#241F1B" opacity=".09"/>
+    <rect x="16" y="115" width="60" height="7" rx="3.5" fill="#241F1B" opacity=".09"/>
+  </g>
+</svg>

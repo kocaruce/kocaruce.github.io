@@ -56,7 +56,7 @@
     const ov = showOverlay(`
       <div class="gate-box">
         <button type="button" class="gate-close" id="gate-close" aria-label="닫기">✕</button>
-        <div class="gate-brand"><span>🌈</span> 꿈 놀이터</div>
+        <div class="gate-brand"><img src="/assets/brand/logo-mark.svg" alt="" width="30" height="30"> 꿈 놀이터</div>
         <h2>선생님 로그인</h2>
         <p class="gate-sub">로그인하면 놀이 도구를 이용할 수 있어요.</p>
         ${googleBlock}
@@ -130,7 +130,7 @@
     const regionOpts = REGIONS.map(r => `<option value="${r}">${r}</option>`).join("");
     const ov = showOverlay(`
       <div class="gate-box">
-        <div class="gate-brand"><span>🌈</span> 꿈 놀이터</div>
+        <div class="gate-brand"><img src="/assets/brand/logo-mark.svg" alt="" width="30" height="30"> 꿈 놀이터</div>
         <h2>선생님 정보를 알려주세요</h2>
         <p class="gate-sub">딱 한 번만 입력하면 돼요.</p>
         <form id="profile-form">
