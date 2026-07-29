@@ -102,6 +102,12 @@ h1, h2, h3, .u-display {
   letter-spacing: -.02em;
 }
 
+/* hidden 은 항상 숨는다.
+   .admin-shell{display:flex} 같은 클래스 규칙이 브라우저 기본 [hidden] 을 이겨서
+   로그인 전에도 관리자 대시보드 껍데기가 보이는 문제가 있었다.
+   (survey.html·word-quiz.html 에는 이미 같은 취지의 규칙이 개별로 들어가 있다) */
+[hidden] { display: none !important; }
+
 /* 키보드 사용자에게만 링을 보여준다 (마우스 클릭에는 안 뜸) */
 :focus-visible {
   outline: none;
