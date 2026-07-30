@@ -8,6 +8,56 @@
   const COLORS = ["#5DCAA5", "#FAC775", "#F0997B", "#9CD6F5"]; // 선택지별 블록 색 (최대 4개)
   let surveys = [], cur = null, votes = {}, unwatch = null, busy = false;
 
+  // ── 데모(오프라인) 백엔드 ──
+  // auth.js 가 없어 Firebase 를 쓸 수 없을 때, 에러 대신 내장 조사와 메모리 투표로 동작한다.
+  // 놀이가 어떻게 보이는지 확인하거나 놀이법 캡처를 뜰 때 쓴다.
+  // 낱말 퀴즈의 window.QUIZ_DEFAULT 와 같은 역할이다.
+  // 실제 서비스에서는 auth.js 가 항상 로드되므로 이 경로를 타지 않는다
+  //  → 로그인하지 않은 사용자에게는 지금처럼 로그인 안내가 그대로 보인다.
+  const DEMO_SURVEYS = [
+    {
+      id: "demo-mood", title: "오늘 기분은 어때요?", status: "open", showLive: true, createdAt: 2,
+      options: [
+        { emoji: "😄", name: "기뻐요" }, { emoji: "😐", name: "그저 그래요" }, { emoji: "😢", name: "슬퍼요" },
+      ],
+    },
+    {
+      id: "demo-fruit", title: "어떤 과일이 제일 좋아요?", status: "closed", showLive: true, createdAt: 1,
+      options: [
+        { emoji: "🍓", name: "딸기" }, { emoji: "🍌", name: "바나나" },
+        { emoji: "🍇", name: "포도" }, { emoji: "🍉", name: "수박" },
+      ],
+    },
+  ];
+
+  // 선택지별 표 수를 실제 저장 형태({키: {opt}})로 펼친다
+  function demoVotes(counts) {
+    const out = {};
+    let n = 0;
+    counts.forEach((c, opt) => { for (let i = 0; i < c; i++) out["d" + (n++)] = { opt }; });
+    return out;
+  }
+  // 표 수는 일부러 적게 잡았다. 블록이 높으면 하단 합계 문구가 화면 밖으로 밀린다.
+  const DEMO_VOTE_STORE = {
+    "demo-mood": demoVotes([4, 2, 3]),
+    "demo-fruit": demoVotes([5, 2, 1, 3]),
+  };
+
+  function installDemoBackend() {
+    const listeners = {};
+    window.listSurveys = async () => DEMO_SURVEYS.map(s => ({ ...s }));
+    window.submitVote = async (id, opt) => {
+      const store = DEMO_VOTE_STORE[id] || (DEMO_VOTE_STORE[id] = {});
+      store["d" + Date.now() + Math.random()] = { opt };
+      (listeners[id] || []).forEach(cb => cb({ ...store }));
+    };
+    window.watchVotes = (id, cb) => {
+      (listeners[id] || (listeners[id] = [])).push(cb);
+      cb({ ...(DEMO_VOTE_STORE[id] || {}) });
+      return () => { listeners[id] = (listeners[id] || []).filter(f => f !== cb); };
+    };
+  }
+
   function show(which) {
     ["gate", "select", "vote", "graph"].forEach(n => { $("sv-" + n).hidden = n !== which; });
     if (which !== "graph" && unwatch) { unwatch(); unwatch = null; }
@@ -129,7 +179,7 @@
   // ── 부팅 ──
   function begin() {
     wire();
-    if (!window.watchAuth) { gateMsg("Firebase 설정이 필요해요."); return; }
+    if (!window.watchAuth) { installDemoBackend(); renderSelect(); return; }
     window.watchAuth((user) => {
       if (!user) {
         gateMsg(`🔒 로그인이 필요해요.<br>꿈 놀이터에서 로그인한 뒤 이용해 주세요.<br>
