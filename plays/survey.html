@@ -12,13 +12,20 @@
 <link href="https://fonts.googleapis.com/css2?family=Jua&family=Gaegu:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#FFF6EA; --ink:#3B2E20; --line:#3B2E20; --muted:#8a7a66;
-    --card:#fff; --sun:#FFC542; --tomato:#F2564D; --leaf:#5BBB5E;
+    /* 색은 css/tokens.css 의 값을 옮겨 적은 것이다.
+       놀이 화면은 폰트를 내장한 자립형이라 tokens.css 를 불러오지 않는다
+       (511KB 제목 서체와 전역 규칙이 아이 화면엔 불필요). 토큰을 고치면 여기도 같이 고칠 것.
+       조사 놀이 = 수·탐구 → 파랑 계열. 허브 카드에서 넘어온 색이 그대로 이어진다. */
+    --bg:#FDF4E8; --ink:#241F1B; --line:#241F1B; --muted:#5C554E;
+    --card:#fff;
+    --tomato:#2F8FD6;       /* 강조 — 큰 글자용 */
+    --tomato-deep:#1A5C8F;  /* 강조 — 작은 글자용(대비 확보) */
+    --sun:#FFC24D; --leaf:#43A047;
   }
   *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
   html,body{height:100%;}
   body{background:var(--bg);color:var(--ink);font-family:'Jua',sans-serif;
-    background-image:radial-gradient(#f3e3c8 6%, transparent 7%);background-size:34px 34px;}
+    background-image:radial-gradient(#F0E4D0 6%, transparent 7%);background-size:34px 34px;}
   main{max-width:980px;margin:0 auto;padding:20px 16px 40px;}
   [hidden]{display:none !important;}
 
@@ -51,7 +58,7 @@
   .sv-item h3{font-size:23px;line-height:1.35;}
   .sv-item .meta{font-family:'Gaegu',sans-serif;font-weight:700;font-size:15px;color:var(--muted);margin-top:8px;}
   .sv-item.closed{opacity:.9;}
-  .sv-item.closed .meta{color:var(--tomato);}
+  .sv-item.closed .meta{color:var(--tomato-deep);}
   .sv-empty{text-align:center;font-family:'Gaegu',sans-serif;font-weight:700;font-size:19px;color:var(--muted);margin-top:40px;line-height:1.8;}
 
   .sv-bar{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;gap:10px;}
@@ -89,7 +96,8 @@
   .g-foot{margin-top:10px;text-align:center;}
   .g-foot .em{font-size:clamp(30px,5vw,42px);display:block;}
   .g-foot .nm{font-size:clamp(16px,2.6vw,21px);display:block;margin-top:2px;}
-  .g-foot .ct{font-size:clamp(22px,3.6vw,30px);color:var(--tomato);display:block;margin-top:2px;}
+  /* 아이가 직접 읽는 숫자라 최소 크기를 키우고 진한 파랑으로 (좁은 화면에서 3.2:1 이었다) */
+  .g-foot .ct{font-size:clamp(24px,3.6vw,30px);color:var(--tomato-deep);display:block;margin-top:2px;}
   .g-total{text-align:center;font-family:'Gaegu',sans-serif;font-weight:700;font-size:18px;color:var(--muted);margin-top:16px;}
   .g-secret{text-align:center;font-size:26px;line-height:1.8;padding:50px 10px;}
   .g-secret .em{font-size:70px;display:block;margin-bottom:10px;}
